@@ -69,7 +69,9 @@
 </div>
 
 <div class="mb-6 bg-[#f29559] py-3.5">
-	<a href="/" class="mx-auto block max-w-7xl px-4 text-lg hover:underline">Projects</a>
+	<div class="mx-auto max-w-7xl px-4 text-lg">
+		<a href="/" class="hover:underline">Projects</a>
+	</div>
 </div>
 
 <div class="mx-auto max-w-7xl px-4">
