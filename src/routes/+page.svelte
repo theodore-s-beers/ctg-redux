@@ -57,6 +57,10 @@
 
 <svelte:head>
 	<title>Closing the Gap in Non-Latin Script Data</title>
+	<meta
+		name="description"
+		content="A database of research projects involving non-Latin-script texts"
+	/>
 </svelte:head>
 
 <div class="mx-auto mb-6 max-w-7xl text-gray-50">
