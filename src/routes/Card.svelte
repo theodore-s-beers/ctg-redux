@@ -24,26 +24,53 @@
 
 	<p class="mb-4">
 		<strong>Locations:</strong>
-		{#each places as place, i}{i === 0 ? '' : ', '}<a
-				class="hover:underline"
-				href={place.place_name.ref}>{place.place_name.text}</a
-			>{/each}
+
+		{#if places.length > 0}
+			{#each places as place, i}
+				{i === 0 ? '' : ', '}
+				<a class="hover:underline" href={place.place_name.ref}
+					>{place.place_name.text}</a
+				>
+			{/each}
+		{:else}
+			N/A
+		{/if}
 	</p>
 
 	<p class="mb-4">
 		<strong>Languages:</strong>
-		{#each languages as language, i}{i === 0 ? '' : ', '}<code>{language}</code>{/each}
+
+		{#if languages.length > 0}
+			{#each languages as language, i}
+				{i === 0 ? '' : ', '}
+				<code>{language}</code>
+			{/each}
+		{:else}
+			N/A
+		{/if}
 	</p>
 
 	<p class="mb-4">
 		<strong>Categories:</strong>
-		{#each categories as category, i}{i === 0 ? '' : ', '}<code>{category}</code>{/each}
+
+		{#if categories.length > 0}
+			{#each categories as category, i}
+				{i === 0 ? '' : ', '}
+				<code>{category}</code>
+			{/each}
+		{:else}
+			N/A
+		{/if}
 	</p>
 
 	<p class="mb-4">
 		<strong>Tags:</strong>
+
 		{#if tags.length > 0}
-			{#each tags as tag, i}{i === 0 ? '' : ', '}<code>{tag}</code>{/each}
+			{#each tags as tag, i}
+				{i === 0 ? '' : ', '}
+				<code>{tag}</code>
+			{/each}
 		{:else}
 			N/A
 		{/if}
@@ -51,13 +78,19 @@
 
 	<p class="mb-4">
 		<strong>Website:</strong>
-		<a class="break-words text-base hover:underline" href={websiteLink}
-			><code>{websiteLink}</code></a
-		>
+
+		{#if websiteLink}
+			<a class="break-words text-base hover:underline" href={websiteLink}
+				><code>{websiteLink}</code></a
+			>
+		{:else}
+			N/A
+		{/if}
 	</p>
 
 	<p class="mb-4">
 		<strong>JSON data:</strong>
+
 		<a class="break-words text-base hover:underline" href={jsonLink}
 			><code>{jsonLink}</code></a
 		>

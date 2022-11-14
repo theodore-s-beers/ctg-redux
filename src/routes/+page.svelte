@@ -26,6 +26,11 @@
 		} else return 0;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	function filterPlaces(places: Record<string, any>[]) {
+		return places.filter((place) => place.place_name.text);
+	}
+
 	onMount(async () => {
 		const listResponse = await fetch(
 			'https://raw.githubusercontent.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/master/PROJECTS.json'
@@ -75,7 +80,7 @@
 				description={data.project.project_desc}
 				startDate={data.project.date[0].from ? data.project.date[0].from : 'N/A'}
 				endDate={data.project.date[0].to ? data.project.date[0].to : 'N/A'}
-				places={data.project.places}
+				places={filterPlaces(data.project.places)}
 				languages={data.project.lang}
 				websiteLink={data.project.websites[0]}
 				jsonLink={url}
