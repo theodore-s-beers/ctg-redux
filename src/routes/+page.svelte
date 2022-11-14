@@ -63,16 +63,16 @@
 	/>
 </svelte:head>
 
-<div class="mx-auto mb-6 max-w-7xl text-gray-50">
+<div class="mx-auto mb-6 max-w-7xl px-4 text-gray-50">
 	<h1 class="mb-3 text-4xl">Closing the Gap</h1>
 	<h2 class="text-2xl">in Non-Latin Script Data</h2>
 </div>
 
 <div class="mb-6 bg-[#f29559] py-3.5">
-	<a href="/" class="mx-auto block max-w-7xl text-lg hover:underline">Projects</a>
+	<a href="/" class="mx-auto block max-w-7xl px-4 text-lg hover:underline">Projects</a>
 </div>
 
-<div class="mx-auto max-w-7xl">
+<div class="mx-auto max-w-7xl px-4">
 	<p class="mb-4 text-center text-lg text-gray-50">
 		<code>{entries.length}</code> entries
 	</p>
