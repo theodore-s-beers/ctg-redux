@@ -50,6 +50,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Closing the Gap in Non-Latin Script Data</title>
+</svelte:head>
+
 <div class="mx-auto mb-6 max-w-7xl text-gray-50">
 	<h1 class="mb-3 text-4xl">Closing the Gap</h1>
 	<h2 class="text-2xl">in Non-Latin Script Data</h2>
