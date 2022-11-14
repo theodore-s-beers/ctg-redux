@@ -13,7 +13,7 @@
 	export let tags: string[];
 </script>
 
-<div class="mb-auto w-[22rem] rounded-lg bg-[#b8b08d] p-4 text-lg lg:w-96">
+<div class="mb-auto w-[21rem] rounded-lg bg-[#b8b08d] p-4 text-lg sm:w-[22rem] lg:w-96">
 	<h3 class="mb-2 font-bold">{title}</h3>
 
 	<p class="mb-4">{description}</p>
