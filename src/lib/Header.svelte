@@ -6,6 +6,7 @@
 <div class="mb-6 bg-[#f29559] py-3.5">
 	<div class="mx-auto flex max-w-7xl space-x-4 px-4 text-lg">
 		<a href="/" class="hover:underline">Projects</a>
+		<a href="/map" class="hover:underline">Map</a>
 		<a href="/about" class="hover:underline">About</a>
 	</div>
 </div>

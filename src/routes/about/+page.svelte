@@ -1,14 +1,6 @@
-<script lang="ts">
-	import Header from '$lib/Header.svelte';
-
-	// bg-[#b8b08d]
-</script>
-
 <svelte:head>
 	<title>Closing the Gap in Non-Latin Script Data – About</title>
 </svelte:head>
-
-<Header />
 
 <div class="mx-auto max-w-6xl px-4">
 	<div class="space-y-6 rounded-lg bg-[#b8b08d] p-4 text-lg">

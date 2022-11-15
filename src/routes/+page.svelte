@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Card from '$lib/Card.svelte';
-	import Header from '$lib/Header.svelte';
 
 	interface ProjectListing {
 		title: string;
@@ -59,8 +58,6 @@
 <svelte:head>
 	<title>Closing the Gap in Non-Latin Script Data – Projects</title>
 </svelte:head>
-
-<Header />
 
 <div class="mx-auto max-w-7xl px-4">
 	<p class="mb-4 text-center text-lg text-gray-50">
