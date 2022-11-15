@@ -10,6 +10,8 @@
 		if (browser) {
 			const leaflet = await import('leaflet');
 
+			leaflet.Icon.Default.imagePath = 'leaflet/';
+
 			map = leaflet.map(mapElement).setView([52.4543, 13.292], 11);
 
 			leaflet
