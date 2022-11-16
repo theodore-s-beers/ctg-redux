@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { entries } from '$lib/stores.svelte';
-	import { filterPlaces, fetchEntries } from '$lib/utils.svelte';
+	import { fetchList, fetchEntries, filterPlaces } from '$lib/utils.svelte';
+	import type { JsonStuff } from '$lib/utils.svelte';
 	import Card from '$lib/Card.svelte';
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let entriesValue: [string, Record<string, any>][];
+	let entriesValue: [string, JsonStuff][];
 
 	entries.subscribe((value) => {
 		entriesValue = value;
 	});
 
 	onMount(async () => {
-		if (entriesValue.length === 0) {
-			await fetchEntries();
+		const [count, listData] = await fetchList();
+
+		if (entriesValue.length !== count) {
+			await fetchEntries(listData);
 		}
 	});
 </script>

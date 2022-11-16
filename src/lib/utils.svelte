@@ -1,24 +1,35 @@
 <script lang="ts" context="module">
 	import { entries } from '$lib/stores.svelte';
 
-	interface ProjectListing {
+	interface Listing {
 		title: string;
 		path: string;
 	}
 
-	export async function fetchEntries() {
-		const listResponse = await fetch(
-			'https://raw.githubusercontent.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/master/PROJECTS.json'
-		);
-		const listData: Record<string, ProjectListing> = await listResponse.json();
-		const listEntries: [string, ProjectListing][] = Object.entries(listData);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	export type JsonStuff = Record<string, any>;
 
-		const prefix =
-			'https://raw.githubusercontent.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/master';
+	const urlPrefix =
+		'https://raw.githubusercontent.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/master';
+
+	export async function fetchList(): Promise<[number, Record<string, Listing>]> {
+		const listResponse = await fetch(`${urlPrefix}/PROJECTS.json`);
+
+		const listData: Record<string, Listing> = await listResponse.json();
+		const count = Object.keys(listData).length;
+
+		return [count, listData];
+	}
+
+	export async function fetchEntries(listData: Record<string, Listing>): Promise<void> {
+		entries.set([]);
+
+		const listEntries: [string, Listing][] = Object.entries(listData);
+
 		const urls: string[] = [];
 
 		for (const [id, details] of listEntries) {
-			urls.push(`${prefix}${details.path}${id}.json`);
+			urls.push(`${urlPrefix}${details.path}${id}.json`);
 		}
 
 		for (const url of urls) {
@@ -33,13 +44,11 @@
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	export function filterPlaces(places: Record<string, any>[]) {
+	export function filterPlaces(places: JsonStuff[]): JsonStuff[] {
 		return places.filter((place) => place.place_name.text);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	export function sortTitles(a: Record<string, any>, b: Record<string, any>) {
+	function sortTitles(a: JsonStuff, b: JsonStuff): 1 | -1 | 0 {
 		const aTitle = a.project.title.toLowerCase();
 		const bTitle = b.project.title.toLowerCase();
 

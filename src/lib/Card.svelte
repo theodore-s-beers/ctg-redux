@@ -1,10 +1,11 @@
 <script lang="ts">
+	import type { JsonStuff } from '$lib/utils.svelte';
+
 	export let title: string;
 	export let description: string;
 	export let startDate: string;
 	export let endDate: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	export let places: Record<string, any>[];
+	export let places: JsonStuff[];
 	export let languages: string[];
 	export let websiteLink: string;
 	export let jsonLink: string;

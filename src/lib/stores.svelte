@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { writable } from 'svelte/store';
 	import type { Writable } from 'svelte/store';
+	import type { JsonStuff } from '$lib/utils.svelte';
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	export const entries: Writable<[string, Record<string, any>][]> = writable([]);
+	export const entries: Writable<[string, JsonStuff][]> = writable([]);
 </script>
