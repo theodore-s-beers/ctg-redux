@@ -4,4 +4,5 @@
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	export const entries: Writable<[string, JsonStuff][]> = writable([]);
+	export const keywordsMap: Writable<Record<string, string[]>> = writable({});
 </script>

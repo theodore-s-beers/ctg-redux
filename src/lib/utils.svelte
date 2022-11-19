@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { entries } from '$lib/stores.svelte';
+	import { entries, keywordsMap } from '$lib/stores.svelte';
 
 	interface Listing {
 		title: string;
@@ -23,6 +23,7 @@
 
 	export async function fetchEntries(listData: Record<string, Listing>): Promise<void> {
 		entries.set([]);
+		keywordsMap.set({});
 
 		const listEntries: [string, Listing][] = Object.entries(listData);
 
@@ -39,6 +40,20 @@
 					if (data.project) {
 						entries.update((value) => [...value, [url, data]]);
 						entries.update((value) => value.sort((a, b) => sortTitles(a[1], b[1])));
+
+						const keywords: string[] = data.project.keywords;
+
+						for (const keyword of keywords) {
+							keywordsMap.update((value) => {
+								if (value[keyword]) {
+									value[keyword].push(url);
+								} else {
+									value[keyword] = [url];
+								}
+
+								return value;
+							});
+						}
 					}
 				});
 		}
