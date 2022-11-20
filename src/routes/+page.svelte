@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+	import { page } from '$app/stores';
+
 	import { entries, keywordsMap } from '$lib/stores.svelte';
 	import { fetchList, fetchEntries, filterPlaces } from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
+
 	import Card from '$lib/Card.svelte';
 
 	let entriesValue: [string, JsonStuff][];
@@ -23,6 +27,10 @@
 
 		if (entriesValue.length !== count) {
 			await fetchEntries(listData);
+		}
+
+		if (browser) {
+			console.log($page.url.hash);
 		}
 	});
 </script>
