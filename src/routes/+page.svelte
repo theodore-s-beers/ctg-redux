@@ -78,7 +78,6 @@
 					selectedTab.set('categories');
 					selectedTerm.set(window.location.hash.split('category=')[1]);
 				} else {
-					selectedTab.set('search');
 					selectedTerm.set('');
 				}
 			} else {
