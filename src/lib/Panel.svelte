@@ -16,7 +16,11 @@
 		selectedTermValue = value;
 	});
 
-	function validate(selectedTermValue: string) {
+	function validate(
+		categories: string[],
+		keywords: string[],
+		selectedTermValue: string
+	) {
 		if (selectedTabValue === 'categories') {
 			return categories.includes(selectedTermValue);
 		}
@@ -28,7 +32,7 @@
 		return false;
 	}
 
-	$: validSelection = validate(selectedTermValue);
+	$: validSelection = validate(categories, keywords, selectedTermValue);
 
 	function resetHash() {
 		selectedTerm.set('');

@@ -81,6 +81,8 @@
 					selectedTab.set('search');
 					selectedTerm.set('');
 				}
+			} else {
+				selectedTerm.set('');
 			}
 		}
 	}
