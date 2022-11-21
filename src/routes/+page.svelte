@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { afterNavigate } from '$app/navigation';
 
 	import {
 		categoriesMap,
@@ -86,9 +87,9 @@
 		}
 	}
 
-	onMount(async () => {
-		handleHash();
+	afterNavigate(handleHash);
 
+	onMount(async () => {
 		const [count, listData] = await fetchList();
 
 		if (entriesValue.length !== count) {
