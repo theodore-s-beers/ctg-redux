@@ -11,7 +11,7 @@
 	export let jsonLink: string;
 	export let lastEdited: string;
 	export let categories: string[];
-	export let tags: string[];
+	export let keywords: string[];
 </script>
 
 <div class="mb-auto w-[21rem] rounded-lg bg-[#b8b08d] p-4 text-lg sm:w-[22rem] lg:w-96">
@@ -44,7 +44,7 @@
 		{#if languages.length > 0}
 			{#each languages as language, i}
 				{i === 0 ? '' : ', '}
-				<code>{language}</code>
+				<code class="text-base">{language}</code>
 			{/each}
 		{:else}
 			N/A
@@ -57,7 +57,7 @@
 		{#if categories.length > 0}
 			{#each categories as category, i}
 				{i === 0 ? '' : ', '}
-				<code>{category}</code>
+				<code class="text-base">{category}</code>
 			{/each}
 		{:else}
 			N/A
@@ -65,12 +65,12 @@
 	</p>
 
 	<p class="mb-4">
-		<strong>Tags:</strong>
+		<strong>Keywords:</strong>
 
-		{#if tags.length > 0}
-			{#each tags as tag, i}
+		{#if keywords.length > 0}
+			{#each keywords as keyword, i}
 				{i === 0 ? '' : ', '}
-				<code>{tag}</code>
+				<code class="text-base">{keyword}</code>
 			{/each}
 		{:else}
 			N/A
@@ -97,5 +97,5 @@
 		>
 	</p>
 
-	<p><strong>Last edited:</strong> {lastEdited}</p>
+	<p><strong>Last edited:</strong> <code class="text-base">{lastEdited}</code></p>
 </div>

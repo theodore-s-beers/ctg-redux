@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				merry: ['Merriweather', 'serif']
+				fira: ['Fira Sans', 'sans-serif']
 			}
 		}
 	},

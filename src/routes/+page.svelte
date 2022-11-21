@@ -3,23 +3,30 @@
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 
-	import { entries, keywordsMap } from '$lib/stores.svelte';
+	import { categoriesMap, entries, keywordsMap } from '$lib/stores.svelte';
 	import { fetchList, fetchEntries, filterPlaces } from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	import Card from '$lib/Card.svelte';
+	import Panel from '$lib/Panel.svelte';
 
 	let entriesValue: [string, JsonStuff][];
+	let categoriesMapValue: Record<string, string[]>;
 	let keywordsMapValue: Record<string, string[]>;
 
 	entries.subscribe((value) => {
 		entriesValue = value;
 	});
 
+	categoriesMap.subscribe((value) => {
+		categoriesMapValue = value;
+	});
+
 	keywordsMap.subscribe((value) => {
 		keywordsMapValue = value;
 	});
 
+	$: categories = Object.keys(categoriesMapValue).sort();
 	$: keywords = Object.keys(keywordsMapValue).sort();
 
 	onMount(async () => {
@@ -29,8 +36,8 @@
 			await fetchEntries(listData);
 		}
 
-		if (browser) {
-			console.log($page.url.hash);
+		if (browser && $page.url.hash) {
+			console.log(`Hash: ${$page.url.hash}`);
 		}
 	});
 </script>
@@ -40,20 +47,7 @@
 </svelte:head>
 
 <div class="mx-auto max-w-[77rem] px-4">
-	<div class="mb-6 rounded-lg bg-[#b8b08d] p-4">
-		<p class="mb-4 text-center text-lg">Keywords</p>
-
-		<div class="flex flex-wrap gap-x-3 gap-y-3.5 text-sm">
-			{#each keywords as keyword}
-				<a href="/"
-					><code
-						class="rounded-md border border-[#2e4a61] py-1 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
-						>{keyword}</code
-					></a
-				>
-			{/each}
-		</div>
-	</div>
+	<Panel {categories} {keywords} selected="search" />
 
 	<p class="mb-4 text-center text-lg text-gray-50">
 		<code>{entriesValue.length}</code> entries
@@ -80,7 +74,7 @@
 				categories={Object.entries(data.project.topic_relations)
 					.filter(([, v]) => v === true)
 					.map(([k]) => k)}
-				tags={data.project.keywords}
+				keywords={data.project.keywords}
 			/>
 		{/each}
 	</div>
