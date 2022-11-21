@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	import { page } from '$app/stores';
 
-	import { categoriesMap, entries, keywordsMap } from '$lib/stores.svelte';
+	import {
+		categoriesMap,
+		entries,
+		keywordsMap,
+		selectedTab,
+		selectedTerm
+	} from '$lib/stores.svelte';
+
 	import { fetchList, fetchEntries, filterPlaces } from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
 
@@ -13,6 +19,9 @@
 	let entriesValue: [string, JsonStuff][];
 	let categoriesMapValue: Record<string, string[]>;
 	let keywordsMapValue: Record<string, string[]>;
+
+	let selectedTabValue: string;
+	let selectedTermValue: string;
 
 	entries.subscribe((value) => {
 		entriesValue = value;
@@ -26,35 +35,82 @@
 		keywordsMapValue = value;
 	});
 
+	selectedTab.subscribe((value) => {
+		selectedTabValue = value;
+	});
+
+	selectedTerm.subscribe((value) => {
+		selectedTermValue = value;
+	});
+
 	$: categories = Object.keys(categoriesMapValue).sort();
 	$: keywords = Object.keys(keywordsMapValue).sort();
 
+	function filterEntries(entriesValue: [string, JsonStuff][], selectedTerm: string) {
+		if (selectedTerm) {
+			if (selectedTabValue === 'categories') {
+				if (categoriesMapValue[selectedTerm]) {
+					const matches = categoriesMapValue[selectedTerm];
+					return entriesValue.filter(([url]) => matches.includes(url));
+				}
+			}
+
+			if (selectedTabValue === 'keywords') {
+				if (keywordsMapValue[selectedTerm]) {
+					const matches = keywordsMapValue[selectedTerm];
+					return entriesValue.filter(([url]) => matches.includes(url));
+				}
+			}
+		}
+
+		return entriesValue;
+	}
+
+	$: filtered = filterEntries(entriesValue, selectedTermValue);
+
+	function handleHash() {
+		if (browser) {
+			if (window.location.hash) {
+				if (window.location.hash.includes('keyword=')) {
+					selectedTab.set('keywords');
+					selectedTerm.set(window.location.hash.split('keyword=')[1]);
+				} else if (window.location.hash.includes('category=')) {
+					selectedTab.set('categories');
+					selectedTerm.set(window.location.hash.split('category=')[1]);
+				} else {
+					selectedTab.set('search');
+					selectedTerm.set('');
+				}
+			}
+		}
+	}
+
 	onMount(async () => {
+		handleHash();
+
 		const [count, listData] = await fetchList();
 
 		if (entriesValue.length !== count) {
 			await fetchEntries(listData);
 		}
-
-		if (browser && $page.url.hash) {
-			console.log(`Hash: ${$page.url.hash}`);
-		}
 	});
 </script>
+
+<svelte:window on:hashchange={handleHash} />
 
 <svelte:head>
 	<title>Closing the Gap in Non-Latin Script Data – Projects</title>
 </svelte:head>
 
 <div class="mx-auto max-w-[77rem] px-4">
-	<Panel {categories} {keywords} selected="search" />
+	<Panel {categories} {keywords} />
 
 	<p class="mb-4 text-center text-lg text-gray-50">
-		<code>{entriesValue.length}</code> entries
+		<code>{filtered.length}</code> entries
 	</p>
 
-	<div class="flex flex-wrap justify-between gap-y-6">
-		{#each entriesValue as [url, data]}
+	<div class="flex flex-wrap gap-6">
+		{#each filtered as [url, data]}
 			<Card
 				title={data.project.title}
 				description={data.project.project_desc}
