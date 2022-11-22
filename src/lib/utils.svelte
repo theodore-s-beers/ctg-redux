@@ -1,25 +1,24 @@
 <script lang="ts" context="module">
-	import { categoriesMap, entries, keywordsMap } from '$lib/stores.svelte';
+	import { browser } from '$app/environment';
+
+	import {
+		categoriesMap,
+		entries,
+		keywordsMap,
+		selectedTab,
+		selectedTerm
+	} from '$lib/stores.svelte';
 
 	interface Listing {
 		title: string;
 		path: string;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	export type JsonStuff = Record<string, any>;
-
 	const urlPrefix =
 		'https://raw.githubusercontent.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/master';
 
-	export async function fetchList(): Promise<[number, Record<string, Listing>]> {
-		const listResponse = await fetch(`${urlPrefix}/PROJECTS.json`);
-
-		const listData: Record<string, Listing> = await listResponse.json();
-		const count = Object.keys(listData).length;
-
-		return [count, listData];
-	}
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	export type JsonStuff = Record<string, any>;
 
 	export async function fetchEntries(listData: Record<string, Listing>): Promise<void> {
 		entries.set([]);
@@ -75,18 +74,61 @@
 		}
 	}
 
+	export async function fetchList(): Promise<[number, Record<string, Listing>]> {
+		const listResponse = await fetch(`${urlPrefix}/PROJECTS.json`);
+
+		const listData: Record<string, Listing> = await listResponse.json();
+		const count = Object.keys(listData).length;
+
+		return [count, listData];
+	}
+
 	export function filterPlaces(places: JsonStuff[]): JsonStuff[] {
 		return places.filter((place) => place.place_name.text);
+	}
+
+	export function handleHash() {
+		if (browser) {
+			if (window.location.hash) {
+				if (window.location.hash.includes('keyword=')) {
+					selectedTab.set('keywords');
+					selectedTerm.set(window.location.hash.split('keyword=')[1]);
+				} else if (window.location.hash.includes('category=')) {
+					selectedTab.set('categories');
+					selectedTerm.set(window.location.hash.split('category=')[1]);
+				} else {
+					selectedTerm.set('');
+				}
+			} else {
+				selectedTerm.set('');
+			}
+		}
+	}
+
+	export function resetHash() {
+		selectedTerm.set('');
+
+		if (browser) {
+			window.location.hash = '';
+		}
+	}
+
+	export function setHash(type: string, term: string) {
+		selectedTerm.set(term);
+
+		if (browser) {
+			window.location.hash = `#${type}=${term}`;
+		}
 	}
 
 	function sortTitles(a: JsonStuff, b: JsonStuff): 1 | -1 | 0 {
 		const aTitle = a.project.title.toLowerCase();
 		const bTitle = b.project.title.toLowerCase();
 
-		if (aTitle < bTitle) {
-			return -1;
-		} else if (aTitle > bTitle) {
+		if (aTitle > bTitle) {
 			return 1;
+		} else if (aTitle < bTitle) {
+			return -1;
 		} else return 0;
 	}
 </script>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
 	import { afterNavigate } from '$app/navigation';
 
 	import {
@@ -11,7 +10,7 @@
 		selectedTerm
 	} from '$lib/stores.svelte';
 
-	import { fetchList, fetchEntries, filterPlaces } from '$lib/utils.svelte';
+	import { fetchList, fetchEntries, filterPlaces, handleHash } from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	import Card from '$lib/Card.svelte';
@@ -68,24 +67,6 @@
 	}
 
 	$: filtered = filterEntries(entriesValue, selectedTermValue);
-
-	function handleHash() {
-		if (browser) {
-			if (window.location.hash) {
-				if (window.location.hash.includes('keyword=')) {
-					selectedTab.set('keywords');
-					selectedTerm.set(window.location.hash.split('keyword=')[1]);
-				} else if (window.location.hash.includes('category=')) {
-					selectedTab.set('categories');
-					selectedTerm.set(window.location.hash.split('category=')[1]);
-				} else {
-					selectedTerm.set('');
-				}
-			} else {
-				selectedTerm.set('');
-			}
-		}
-	}
 
 	afterNavigate(handleHash);
 

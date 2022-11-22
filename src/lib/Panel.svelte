@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { selectedTab, selectedTerm } from '$lib/stores.svelte';
+	import { resetHash, setHash } from '$lib/utils.svelte';
 
 	export let categories: string[];
 	export let keywords: string[];
@@ -33,22 +33,6 @@
 	}
 
 	$: validSelection = validate(categories, keywords, selectedTermValue);
-
-	function resetHash() {
-		selectedTerm.set('');
-
-		if (browser) {
-			window.location.hash = '';
-		}
-	}
-
-	function setHash(type: string, term: string) {
-		selectedTerm.set(term);
-
-		if (browser) {
-			window.location.hash = `#${type}=${term}`;
-		}
-	}
 </script>
 
 <div class="mb-6 rounded-lg bg-[#b8b08d] p-4">
@@ -72,6 +56,7 @@
 			>
 				Search
 			</li>
+
 			<li
 				on:click={() => {
 					selectedTab.set('categories');
@@ -90,6 +75,7 @@
 			>
 				Categories
 			</li>
+
 			<li
 				on:click={() => {
 					selectedTab.set('keywords');
