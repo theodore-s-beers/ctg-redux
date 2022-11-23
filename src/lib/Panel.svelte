@@ -114,7 +114,7 @@
 			</p>
 		{/if}
 
-		<div class="flex flex-wrap gap-2 text-sm">
+		<div class="flex flex-wrap gap-2.5 text-sm">
 			{#if selectedTabValue === 'categories'}
 				{#each categories as category}
 					<code
@@ -126,7 +126,7 @@
 								setHash('category', category);
 							}
 						}}
-						class="cursor-pointer rounded-md border border-[#2e4a61] py-1 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
+						class="cursor-pointer rounded-md border border-[#2e4a61] py-0.5 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
 						class:bg-[#2e4a61]={selectedTermValue === category}
 						class:text-gray-50={selectedTermValue === category}>{category}</code
 					>
@@ -142,7 +142,7 @@
 								setHash('keyword', keyword);
 							}
 						}}
-						class="cursor-pointer rounded-md border border-[#2e4a61] py-1 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
+						class="cursor-pointer rounded-md border border-[#2e4a61] py-0.5 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
 						class:bg-[#2e4a61]={selectedTermValue === keyword}
 						class:text-gray-50={selectedTermValue === keyword}>{keyword}</code
 					>
