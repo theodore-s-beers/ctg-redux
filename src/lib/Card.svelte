@@ -48,7 +48,7 @@
 
 		<div class="mb-3">
 			{#each realPeriods as period}
-				<div class="flex items-center gap-1.5">
+				<div class="mb-1.5 flex items-center gap-1.5">
 					<div class="w-7"><Calendar /></div>
 					<div class="font-mono">{period.from.slice(0, 4)}</div>
 					<div class="w-6"><Arrow /></div>
