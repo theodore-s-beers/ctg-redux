@@ -30,8 +30,11 @@
 				<div class="flex flex-wrap gap-x-1.5">
 					{#each places as place, i}
 						<div>
-							<a class="hover:underline" href={place.place_name.ref}
-								>{place.place_name.text}</a
+							<a
+								href={place.place_name.ref}
+								target="_blank"
+								rel="noreferrer"
+								class="hover:underline">{place.place_name.text}</a
 							>{#if i < places.length - 1},{/if}
 						</div>
 					{/each}
