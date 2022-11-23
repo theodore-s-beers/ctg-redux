@@ -97,11 +97,10 @@
 			<Card
 				title={data.project.title}
 				description={data.project.project_desc}
-				startDate={data.project.date[0].from ? data.project.date[0].from : 'N/A'}
-				endDate={data.project.date[0].to ? data.project.date[0].to : 'N/A'}
+				periods={data.project.date}
 				places={filterPlaces(data.project.places)}
 				languages={data.project.lang}
-				websiteLink={data.project.websites[0]}
+				websiteLinks={data.project.websites}
 				jsonLink={url}
 				lastEdited={data.record_metadata.record_modified[
 					data.record_metadata.record_modified.length - 1
