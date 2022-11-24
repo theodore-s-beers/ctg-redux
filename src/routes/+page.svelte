@@ -115,7 +115,7 @@
 		<code>{filtered.length}</code> items
 	</p>
 
-	<div class="flex flex-wrap gap-4">
+	<div class="flex flex-wrap justify-center gap-4">
 		{#each filtered as [url, data]}
 			<Card
 				title={data.project.title}
