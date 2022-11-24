@@ -24,7 +24,7 @@
 <div class="mb-auto w-[21rem] rounded-lg bg-[#b8b08d] text-base sm:w-[22rem] lg:w-96">
 	<div class="p-4 pb-3">
 		<div class="mb-3 flex gap-x-1.5">
-			<div class="w-6"><Pin /></div>
+			<div class="w-6 shrink-0"><Pin /></div>
 
 			{#if places.length > 0}
 				<div class="flex flex-wrap gap-x-1.5">

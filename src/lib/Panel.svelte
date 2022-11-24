@@ -1,12 +1,31 @@
 <script lang="ts">
-	import { selectedTab, selectedTerm } from '$lib/stores.svelte';
-	import { resetHash, setHash } from '$lib/utils.svelte';
+	import {
+		entries,
+		searchTerm,
+		selectedEntries,
+		selectedTab,
+		selectedTerm
+	} from '$lib/stores.svelte';
+
+	import { searchEntries, resetHash, setHash } from '$lib/utils.svelte';
+	import type { JsonStuff } from '$lib/utils.svelte';
 
 	export let categories: string[];
 	export let keywords: string[];
 
+	let entriesValue: [string, JsonStuff][] = [];
+	let searchTermValue: string;
+
 	let selectedTabValue: string;
 	let selectedTermValue: string;
+
+	entries.subscribe((value) => {
+		entriesValue = value;
+	});
+
+	searchTerm.subscribe((value) => {
+		searchTermValue = value;
+	});
 
 	selectedTab.subscribe((value) => {
 		selectedTabValue = value;
@@ -15,6 +34,23 @@
 	selectedTerm.subscribe((value) => {
 		selectedTermValue = value;
 	});
+
+	function search() {
+		searchTerm.set(searchTermValue);
+		const matchingEntries = searchEntries(entriesValue, searchTermValue);
+		selectedEntries.set(matchingEntries);
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	let timeout: any = null;
+
+	function handleSearch() {
+		clearTimeout(timeout);
+
+		timeout = setTimeout(() => {
+			search();
+		}, 500);
+	}
 
 	function validate(
 		categories: string[],
@@ -154,6 +190,12 @@
 			{/if}
 		</div>
 	{:else}
-		<p><em>To be implemented…</em></p>
+		<input
+			class="w-64 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1"
+			bind:value={searchTermValue}
+			on:keydown={() => {
+				handleSearch();
+			}}
+		/>
 	{/if}
 </div>

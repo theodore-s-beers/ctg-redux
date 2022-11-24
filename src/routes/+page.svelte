@@ -6,6 +6,8 @@
 		categoriesMap,
 		entries,
 		keywordsMap,
+		searchTerm,
+		selectedEntries,
 		selectedTab,
 		selectedTerm
 	} from '$lib/stores.svelte';
@@ -19,6 +21,9 @@
 	let entriesValue: [string, JsonStuff][];
 	let categoriesMapValue: Record<string, string[]>;
 	let keywordsMapValue: Record<string, string[]>;
+
+	let searchTermValue: string;
+	let selectedEntriesValue: [string, JsonStuff][];
 
 	let selectedTabValue: string;
 	let selectedTermValue: string;
@@ -35,6 +40,14 @@
 		keywordsMapValue = value;
 	});
 
+	searchTerm.subscribe((value) => {
+		searchTermValue = value;
+	});
+
+	selectedEntries.subscribe((value) => {
+		selectedEntriesValue = value;
+	});
+
 	selectedTab.subscribe((value) => {
 		selectedTabValue = value;
 	});
@@ -46,27 +59,37 @@
 	$: categories = Object.keys(categoriesMapValue).sort();
 	$: keywords = Object.keys(keywordsMapValue).sort();
 
-	function filterEntries(entriesValue: [string, JsonStuff][], selectedTerm: string) {
+	function filterEntries(
+		entries: [string, JsonStuff][],
+		searchTerm: string,
+		selectedTab: string,
+		selectedTerm: string
+	) {
+		if (selectedTab === 'search' && searchTerm) {
+			return selectedEntriesValue;
+		}
+
 		if (selectedTerm) {
-			if (selectedTabValue === 'categories') {
-				if (categoriesMapValue[selectedTerm]) {
-					const matches = categoriesMapValue[selectedTerm];
-					return entriesValue.filter(([url]) => matches.includes(url));
-				}
+			if (selectedTab === 'categories' && categoriesMapValue[selectedTerm]) {
+				const matches = categoriesMapValue[selectedTerm];
+				return entries.filter(([url]) => matches.includes(url));
 			}
 
-			if (selectedTabValue === 'keywords') {
-				if (keywordsMapValue[selectedTerm]) {
-					const matches = keywordsMapValue[selectedTerm];
-					return entriesValue.filter(([url]) => matches.includes(url));
-				}
+			if (selectedTab === 'keywords' && keywordsMapValue[selectedTerm]) {
+				const matches = keywordsMapValue[selectedTerm];
+				return entries.filter(([url]) => matches.includes(url));
 			}
 		}
 
-		return entriesValue;
+		return entries;
 	}
 
-	$: filtered = filterEntries(entriesValue, selectedTermValue);
+	$: filtered = filterEntries(
+		entriesValue,
+		searchTermValue,
+		selectedTabValue,
+		selectedTermValue
+	);
 
 	afterNavigate(handleHash);
 
