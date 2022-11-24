@@ -36,7 +36,7 @@
 </script>
 
 <div class="mb-6 rounded-lg bg-[#b8b08d] p-4">
-	<div class="mb-4 border-b border-b-[#2e4a61]">
+	<div class="mb-4 border-b border-b-slate-800">
 		<ul class="flex gap-1.5 text-lg">
 			<li
 				on:click={() => {
@@ -49,9 +49,9 @@
 						resetHash();
 					}
 				}}
-				class="cursor-pointer rounded-t-md border-x border-t px-2.5 py-1 hover:border-[#2e4a61] hover:bg-[#f29559]"
+				class="cursor-pointer rounded-t-md border-x border-t px-2 py-0.5 hover:border-slate-800 hover:bg-[#f29559]"
 				class:bg-[#f29559]={selectedTabValue === 'search'}
-				class:border-[#2e4a61]={selectedTabValue === 'search'}
+				class:border-slate-800={selectedTabValue === 'search'}
 				class:border-[#b8b08d]={selectedTabValue !== 'search'}
 			>
 				Search
@@ -68,9 +68,9 @@
 						resetHash();
 					}
 				}}
-				class="cursor-pointer rounded-t-md border-x border-t px-2.5 py-1 hover:border-[#2e4a61] hover:bg-[#f29559]"
+				class="cursor-pointer rounded-t-md border-x border-t px-2 py-0.5 hover:border-slate-800 hover:bg-[#f29559]"
 				class:bg-[#f29559]={selectedTabValue === 'categories'}
-				class:border-[#2e4a61]={selectedTabValue === 'categories'}
+				class:border-slate-800={selectedTabValue === 'categories'}
 				class:border-[#b8b08d]={selectedTabValue !== 'categories'}
 			>
 				Categories
@@ -87,9 +87,9 @@
 						resetHash();
 					}
 				}}
-				class="cursor-pointer rounded-t-md border-x border-t px-2.5 py-1 hover:border-[#2e4a61] hover:bg-[#f29559]"
+				class="cursor-pointer rounded-t-md border-x border-t px-2 py-0.5 hover:border-slate-800 hover:bg-[#f29559]"
 				class:bg-[#f29559]={selectedTabValue === 'keywords'}
-				class:border-[#2e4a61]={selectedTabValue === 'keywords'}
+				class:border-slate-800={selectedTabValue === 'keywords'}
 				class:border-[#b8b08d]={selectedTabValue !== 'keywords'}
 			>
 				Keywords
@@ -126,8 +126,10 @@
 								setHash('category', category);
 							}
 						}}
-						class="cursor-pointer rounded-md border border-[#2e4a61] py-0.5 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
+						class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
 						class:bg-[#2e4a61]={selectedTermValue === category}
+						class:border-[#2e4a61]={selectedTermValue === category}
+						class:border-slate-800={selectedTermValue !== category}
 						class:text-gray-50={selectedTermValue === category}>{category}</code
 					>
 				{/each}
@@ -142,8 +144,10 @@
 								setHash('keyword', keyword);
 							}
 						}}
-						class="cursor-pointer rounded-md border border-[#2e4a61] py-0.5 px-2 hover:bg-[#2e4a61] hover:text-gray-50"
+						class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
 						class:bg-[#2e4a61]={selectedTermValue === keyword}
+						class:border-[#2e4a61]={selectedTermValue === keyword}
+						class:border-slate-800={selectedTermValue !== keyword}
 						class:text-gray-50={selectedTermValue === keyword}>{keyword}</code
 					>
 				{/each}
