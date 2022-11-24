@@ -108,14 +108,14 @@
 	<title>Closing the Gap in Non-Latin Script Data – Projects</title>
 </svelte:head>
 
-<div class="mx-auto max-w-[77rem] px-4">
+<div class="mx-auto max-w-[76rem] px-4">
 	<Panel {categories} {keywords} />
 
 	<p class="mb-4 text-center text-lg text-gray-50">
-		<code>{filtered.length}</code> entries
+		<code>{filtered.length}</code> items
 	</p>
 
-	<div class="flex flex-wrap gap-6">
+	<div class="flex flex-wrap gap-4">
 		{#each filtered as [url, data]}
 			<Card
 				title={data.project.title}

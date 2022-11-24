@@ -71,7 +71,7 @@
 	$: validSelection = validate(categories, keywords, selectedTermValue);
 </script>
 
-<div class="mb-6 rounded-lg bg-[#b8b08d] p-4">
+<div class="mb-4 rounded-lg bg-[#b8b08d] p-4">
 	<div class="mb-4 border-b border-b-slate-800">
 		<ul class="flex gap-1.5 text-lg">
 			<li
@@ -191,6 +191,8 @@
 		</div>
 	{:else}
 		<input
+			autocorrect="off"
+			autocapitalize="none"
 			class="w-64 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1"
 			bind:value={searchTermValue}
 			on:keydown={() => {

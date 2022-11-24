@@ -3,7 +3,7 @@
 </svelte:head>
 
 <div class="mx-auto max-w-6xl px-4">
-	<div class="space-y-6 rounded-lg bg-[#b8b08d] p-4 text-lg">
+	<div class="space-y-4 rounded-lg bg-[#b8b08d] p-4 text-lg">
 		<h2 class="text-center text-2xl">About Us</h2>
 
 		<div class="space-y-4">
@@ -52,7 +52,7 @@
 			</p>
 		</div>
 
-		<div class="space-y-6 text-center">
+		<div class="space-y-4 text-center">
 			<p class="text-xl">
 				If you want to contribute in any way, to work on a localization of this service
 				or to report bugs or feature requests, feel free to contact us via
