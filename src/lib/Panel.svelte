@@ -135,7 +135,7 @@
 
 	{#if selectedTabValue !== 'search'}
 		{#if validSelection}
-			<p class="mb-4 text-rose-900 underline">
+			<p class="mb-3.5 -mt-1 text-red-900 underline">
 				<span
 					on:click={() => {
 						resetHash();
@@ -190,14 +190,25 @@
 			{/if}
 		</div>
 	{:else}
-		<input
-			autocorrect="off"
-			autocapitalize="none"
-			class="w-64 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1"
-			bind:value={searchTermValue}
-			on:keydown={() => {
-				handleSearch();
-			}}
-		/>
+		<div class="flex gap-2">
+			<input
+				autocorrect="off"
+				autocapitalize="none"
+				class="w-52 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1"
+				bind:value={searchTermValue}
+				on:keydown={() => {
+					handleSearch();
+				}}
+			/>
+
+			{#if searchTermValue}
+				<button
+					on:click={() => {
+						searchTerm.set('');
+					}}
+					class="rounded bg-red-900 px-2 text-gray-100">Clear</button
+				>
+			{/if}
+		</div>
 	{/if}
 </div>
