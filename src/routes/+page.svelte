@@ -112,10 +112,11 @@
 	<Panel {categories} {keywords} />
 
 	<p class="mb-4 text-center text-lg text-gray-50">
-		<code>{filtered.length}</code> items
+		<code>{filtered.length}</code>
+		{filtered.length === 1 ? 'item' : 'items'}
 	</p>
 
-	<div class="flex flex-wrap justify-center gap-4">
+	<div class="flex flex-wrap justify-center gap-4 lg:justify-start">
 		{#each filtered as [url, data]}
 			<Card
 				title={data.project.title}
