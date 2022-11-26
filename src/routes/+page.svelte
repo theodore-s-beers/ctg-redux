@@ -106,6 +106,10 @@
 
 <svelte:head>
 	<title>Closing the Gap in Non-Latin Script Data – Projects</title>
+	<meta
+		name="twitter:title"
+		content="Closing the Gap in Non-Latin Script Data – Projects"
+	/>
 </svelte:head>
 
 <div class="mx-auto max-w-[76rem] px-4">
