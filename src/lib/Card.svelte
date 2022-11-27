@@ -45,28 +45,30 @@
 
 		<h3 class="mb-3 text-xl font-bold">{title}</h3>
 
-		<div class="mb-2">
-			{#each realPeriods as period}
-				<div class="mb-1.5 flex items-center gap-1.5">
-					<div class="w-7"><Calendar /></div>
-					<div class="font-mono">{period.from.slice(0, 4)}</div>
-					<div class="w-6"><Arrow /></div>
-					<div class="font-mono">{period.to.slice(0, 4)}</div>
-				</div>
-			{/each}
-		</div>
-
-		{#if languages.length > 0}
-			<div class="mb-3 flex items-center gap-1.5">
-				<div class="w-7"><Lang /></div>
-
-				{#each languages as language, i}
-					<div>
-						<code>{language}</code>{#if i < languages.length - 1}&#8202;,{/if}
+		<div class="mb-3">
+			<div class="mb-2">
+				{#each realPeriods as period}
+					<div class="mb-2 flex items-center gap-x-1.5">
+						<div class="w-7"><Calendar /></div>
+						<div class="font-mono">{period.from.slice(0, 4)}</div>
+						<div class="w-6"><Arrow /></div>
+						<div class="font-mono">{period.to.slice(0, 4)}</div>
 					</div>
 				{/each}
 			</div>
-		{/if}
+
+			{#if languages.length > 0}
+				<div class="flex items-center gap-x-1.5">
+					<div class="w-7"><Lang /></div>
+
+					{#each languages as language, i}
+						<div>
+							<code>{language}</code>{#if i < languages.length - 1}&#8202;,{/if}
+						</div>
+					{/each}
+				</div>
+			{/if}
+		</div>
 
 		<p class="mb-3">{description}</p>
 
