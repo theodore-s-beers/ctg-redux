@@ -23,10 +23,10 @@
 
 <div class="mb-auto w-[22.5rem] rounded-lg bg-[#b8b08d] text-base lg:w-96">
 	<div class="p-4 pb-0">
-		<div class="mb-3 flex gap-x-1.5">
-			<div class="w-6 shrink-0"><Pin /></div>
+		{#if places.length > 0}
+			<div class="mb-3 flex gap-x-1.5">
+				<div class="w-6 shrink-0"><Pin /></div>
 
-			{#if places.length > 0}
 				<div class="flex flex-wrap gap-x-1.5">
 					{#each places as place, i}
 						<div>
@@ -39,10 +39,8 @@
 						</div>
 					{/each}
 				</div>
-			{:else}
-				N/A
-			{/if}
-		</div>
+			</div>
+		{/if}
 
 		<h3 class="mb-3 text-xl font-bold">{title}</h3>
 
