@@ -4,6 +4,7 @@
 	import Arrow from '$lib/svg/Arrow.svelte';
 	import Calendar from '$lib/svg/Calendar.svelte';
 	import CodeLink from '$lib/svg/CodeLink.svelte';
+	import Lang from '$lib/svg/Lang.svelte';
 	import Link from '$lib/svg/Link.svelte';
 	import Pin from '$lib/svg/Pin.svelte';
 
@@ -44,7 +45,7 @@
 
 		<h3 class="mb-3 text-xl font-bold">{title}</h3>
 
-		<div class="mb-3">
+		<div class="mb-2">
 			{#each realPeriods as period}
 				<div class="mb-1.5 flex items-center gap-1.5">
 					<div class="w-7"><Calendar /></div>
@@ -55,27 +56,26 @@
 			{/each}
 		</div>
 
-		<p class="mb-3">{description}</p>
+		{#if languages.length > 0}
+			<div class="mb-3 flex items-center gap-1.5">
+				<div class="w-7"><Lang /></div>
 
-		<p class="mb-2">
-			<strong>Languages:</strong>
-
-			{#if languages.length > 0}
 				{#each languages as language, i}
-					{i === 0 ? '' : ', '}
-					<code>{language}</code>
+					<div>
+						<code>{language}</code>{#if i < languages.length - 1}&#8202;,{/if}
+					</div>
 				{/each}
-			{:else}
-				N/A
-			{/if}
-		</p>
+			</div>
+		{/if}
+
+		<p class="mb-3">{description}</p>
 
 		<p class="mb-2">
 			<strong>Categories:</strong>
 
 			{#if categories.length > 0}
 				{#each categories as category, i}
-					{i === 0 ? '' : ', '}
+					{#if i > 0}&#8202;,{/if}
 					<code>{category}</code>
 				{/each}
 			{:else}
@@ -88,7 +88,7 @@
 
 			{#if keywords.length > 0}
 				{#each keywords as keyword, i}
-					{i === 0 ? '' : ', '}
+					{#if i > 0}&#8202;,{/if}
 					<code>{keyword}</code>
 				{/each}
 			{:else}
