@@ -35,12 +35,6 @@
 		selectedTermValue = value;
 	});
 
-	function search() {
-		searchTerm.set(searchTermValue);
-		const matchingEntries = searchEntries(entriesValue, searchTermValue);
-		selectedEntries.set(matchingEntries);
-	}
-
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let timeout: any = null;
 
@@ -48,7 +42,9 @@
 		clearTimeout(timeout);
 
 		timeout = setTimeout(() => {
-			search();
+			searchTerm.set(searchTermValue);
+			const matchingEntries = searchEntries(entriesValue, searchTermValue);
+			selectedEntries.set(matchingEntries);
 		}, 500);
 	}
 
