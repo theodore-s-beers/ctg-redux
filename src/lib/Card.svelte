@@ -22,7 +22,7 @@
 </script>
 
 <div class="mb-auto w-[22.5rem] rounded-lg bg-[#b8b08d] text-base lg:w-96">
-	<div class="p-4 pb-3">
+	<div class="p-4 pb-0">
 		<div class="mb-3 flex gap-x-1.5">
 			<div class="w-6 shrink-0"><Pin /></div>
 
@@ -115,7 +115,7 @@
 		</div>
 	</div>
 
-	<div class="rounded-b-lg bg-slate-800 px-3 py-1.5">
+	<div class="-mt-4 rounded-b-lg bg-slate-800 px-3 py-1.5">
 		<p class="text-right text-sm text-gray-300">
 			Last edited: <code>{lastEdited}</code>
 		</p>
