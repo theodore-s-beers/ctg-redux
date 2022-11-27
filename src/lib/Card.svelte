@@ -117,7 +117,7 @@
 
 	<div class="-mt-4 rounded-b-lg bg-slate-800 px-3 py-1.5">
 		<p class="text-right text-sm text-gray-300">
-			Last edited: <code>{lastEdited}</code>
+			Last edit: <code>{lastEdited}</code>
 		</p>
 	</div>
 </div>
