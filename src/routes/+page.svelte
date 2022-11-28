@@ -129,7 +129,7 @@
 				places={filterPlaces(data.project.places)}
 				languages={data.project.lang}
 				websiteLinks={data.project.websites}
-				jsonLink={url}
+				{url}
 				lastEdited={data.record_metadata.record_modified[
 					data.record_metadata.record_modified.length - 1
 				].record_modified_on

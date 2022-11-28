@@ -14,12 +14,17 @@
 	export let places: JsonStuff[];
 	export let languages: string[];
 	export let websiteLinks: string[];
-	export let jsonLink: string;
+	export let url: string;
 	export let lastEdited: string;
 	export let categories: string[];
 	export let keywords: string[];
 
 	$: realPeriods = periods.filter((period) => period.from);
+
+	const prefix =
+		'https://github.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/blob/master/PROJECTS/';
+	$: suffix = url.split('/PROJECTS/')[1];
+	$: jsonLink = prefix + suffix;
 </script>
 
 <div class="mb-auto w-[22.5rem] rounded-lg bg-[#b8b08d] text-base lg:w-96">
