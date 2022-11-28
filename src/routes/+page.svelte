@@ -137,9 +137,6 @@
 							data.record_metadata.record_modified.length - 1
 					  ].record_modified_on
 					: data.record_metadata.record_created_on}
-				categories={Object.entries(data.project.topic_relations)
-					.filter(([, v]) => v === true)
-					.map(([k]) => k)}
 				keywords={data.project.keywords}
 			/>
 		{/each}

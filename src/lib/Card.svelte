@@ -16,7 +16,6 @@
 	export let websiteLinks: string[];
 	export let url: string;
 	export let lastEdited: string;
-	export let categories: string[];
 	export let keywords: string[];
 
 	$: realPeriods = periods.filter((period) => period.from);
@@ -75,33 +74,13 @@
 			{/if}
 		</div>
 
-		<p class="mb-3">{description}</p>
+		<p class="mb-3.5">{description}</p>
 
-		<p class="mb-2">
-			<strong>Categories:</strong>
-
-			{#if categories.length > 0}
-				{#each categories as category, i}
-					{#if i > 0}&#8202;,{/if}
-					<code>{category}</code>
-				{/each}
-			{:else}
-				N/A
-			{/if}
-		</p>
-
-		<p class="mb-3">
-			<strong>Keywords:</strong>
-
-			{#if keywords.length > 0}
-				{#each keywords as keyword, i}
-					{#if i > 0}&#8202;,{/if}
-					<code>{keyword}</code>
-				{/each}
-			{:else}
-				N/A
-			{/if}
-		</p>
+		<div class="mb-4 flex flex-wrap gap-2 text-sm">
+			{#each keywords as keyword}
+				<code class="rounded-md border border-slate-800 py-0.5 px-2">{keyword}</code>
+			{/each}
+		</div>
 
 		<div class="flex gap-x-2">
 			{#each websiteLinks as link}
