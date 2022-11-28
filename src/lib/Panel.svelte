@@ -10,7 +10,6 @@
 	import { searchEntries, resetHash, setHash } from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
 
-	export let categories: string[];
 	export let keywords: string[];
 
 	let entriesValue: [string, JsonStuff][] = [];
@@ -48,15 +47,7 @@
 		}, 500);
 	}
 
-	function validate(
-		categories: string[],
-		keywords: string[],
-		selectedTermValue: string
-	) {
-		if (selectedTabValue === 'categories') {
-			return categories.includes(selectedTermValue);
-		}
-
+	function validate(keywords: string[], selectedTermValue: string) {
 		if (selectedTabValue === 'keywords') {
 			return keywords.includes(selectedTermValue);
 		}
@@ -64,12 +55,12 @@
 		return false;
 	}
 
-	$: validSelection = validate(categories, keywords, selectedTermValue);
+	$: validSelection = validate(keywords, selectedTermValue);
 </script>
 
 <div class="mb-4 rounded-lg bg-[#b8b08d] p-4">
 	<div class="mb-4 border-b border-b-slate-800">
-		<ul class="flex gap-1.5 text-lg">
+		<ul class="flex gap-2 text-lg">
 			<li
 				on:click={() => {
 					selectedTab.set('search');
@@ -87,25 +78,6 @@
 				class:border-[#b8b08d]={selectedTabValue !== 'search'}
 			>
 				Search
-			</li>
-
-			<li
-				on:click={() => {
-					selectedTab.set('categories');
-					resetHash();
-				}}
-				on:keydown={(e) => {
-					if (e.key === 'Enter') {
-						selectedTab.set('categories');
-						resetHash();
-					}
-				}}
-				class="cursor-pointer rounded-t-md border-x border-t px-2 py-0.5 hover:border-slate-800 hover:bg-[#f29559]"
-				class:bg-[#f29559]={selectedTabValue === 'categories'}
-				class:border-slate-800={selectedTabValue === 'categories'}
-				class:border-[#b8b08d]={selectedTabValue !== 'categories'}
-			>
-				Categories
 			</li>
 
 			<li
@@ -147,43 +119,23 @@
 		{/if}
 
 		<div class="flex flex-wrap gap-2.5 text-sm">
-			{#if selectedTabValue === 'categories'}
-				{#each categories as category}
-					<code
-						on:click={() => {
-							setHash('category', category);
-						}}
-						on:keydown={(e) => {
-							if (e.key === 'Enter') {
-								setHash('category', category);
-							}
-						}}
-						class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
-						class:bg-[#2e4a61]={selectedTermValue === category}
-						class:border-[#2e4a61]={selectedTermValue === category}
-						class:border-slate-800={selectedTermValue !== category}
-						class:text-gray-50={selectedTermValue === category}>{category}</code
-					>
-				{/each}
-			{:else}
-				{#each keywords as keyword}
-					<code
-						on:click={() => {
+			{#each keywords as keyword}
+				<code
+					on:click={() => {
+						setHash('keyword', keyword);
+					}}
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
 							setHash('keyword', keyword);
-						}}
-						on:keydown={(e) => {
-							if (e.key === 'Enter') {
-								setHash('keyword', keyword);
-							}
-						}}
-						class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
-						class:bg-[#2e4a61]={selectedTermValue === keyword}
-						class:border-[#2e4a61]={selectedTermValue === keyword}
-						class:border-slate-800={selectedTermValue !== keyword}
-						class:text-gray-50={selectedTermValue === keyword}>{keyword}</code
-					>
-				{/each}
-			{/if}
+						}
+					}}
+					class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
+					class:bg-[#2e4a61]={selectedTermValue === keyword}
+					class:border-[#2e4a61]={selectedTermValue === keyword}
+					class:border-slate-800={selectedTermValue !== keyword}
+					class:text-gray-50={selectedTermValue === keyword}>{keyword}</code
+				>
+			{/each}
 		</div>
 	{:else}
 		<div class="flex gap-2">

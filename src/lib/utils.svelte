@@ -2,7 +2,6 @@
 	import { browser } from '$app/environment';
 
 	import {
-		categoriesMap,
 		entries,
 		keywordsMap,
 		searchTerm,
@@ -23,7 +22,6 @@
 
 	export async function fetchEntries(listData: Record<string, Listing>): Promise<void> {
 		entries.set([]);
-		categoriesMap.set({});
 		keywordsMap.set({});
 
 		const listEntries: [string, Listing][] = Object.entries(listData);
@@ -42,22 +40,7 @@
 						entries.update((value) => [...value, [url, data]]);
 						entries.update((value) => value.sort((a, b) => sortTitles(a[1], b[1])));
 
-						const categories: Record<string, boolean> = data.project.topic_relations;
 						const keywords: string[] = data.project.keywords;
-
-						for (const [key, value] of Object.entries(categories)) {
-							if (value === true) {
-								categoriesMap.update((value) => {
-									if (value[key]) {
-										value[key].push(url);
-									} else {
-										value[key] = [url];
-									}
-
-									return value;
-								});
-							}
-						}
 
 						for (const keyword of keywords) {
 							keywordsMap.update((value) => {
@@ -94,9 +77,6 @@
 				if (window.location.hash.startsWith('#keyword=')) {
 					selectedTab.set('keywords');
 					selectedTerm.set(window.location.hash.split('keyword=')[1]);
-				} else if (window.location.hash.startsWith('#category=')) {
-					selectedTab.set('categories');
-					selectedTerm.set(window.location.hash.split('category=')[1]);
 				} else {
 					// TODO: handle search hash
 					// For now, just reset
@@ -157,6 +137,8 @@
 			}
 
 			// Categories
+			// This data isn't shown in the front end anymore, but if it's still
+			// in the JSON, we may as well search it
 			const categories = Object.entries(entry.project.topic_relations)
 				.filter(([, v]) => v === true)
 				.map(([k]) => k)

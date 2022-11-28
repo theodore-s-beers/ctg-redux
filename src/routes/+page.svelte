@@ -3,7 +3,6 @@
 	import { afterNavigate } from '$app/navigation';
 
 	import {
-		categoriesMap,
 		entries,
 		keywordsMap,
 		searchTerm,
@@ -19,7 +18,6 @@
 	import Panel from '$lib/Panel.svelte';
 
 	let entriesValue: [string, JsonStuff][];
-	let categoriesMapValue: Record<string, string[]>;
 	let keywordsMapValue: Record<string, string[]>;
 
 	let searchTermValue: string;
@@ -30,10 +28,6 @@
 
 	entries.subscribe((value) => {
 		entriesValue = value;
-	});
-
-	categoriesMap.subscribe((value) => {
-		categoriesMapValue = value;
 	});
 
 	keywordsMap.subscribe((value) => {
@@ -56,7 +50,6 @@
 		selectedTermValue = value;
 	});
 
-	$: categories = Object.keys(categoriesMapValue).sort();
 	$: keywords = Object.keys(keywordsMapValue).sort();
 
 	function filterEntries(
@@ -70,11 +63,6 @@
 		}
 
 		if (selectedTerm) {
-			if (selectedTab === 'categories' && categoriesMapValue[selectedTerm]) {
-				const matches = categoriesMapValue[selectedTerm];
-				return entries.filter(([url]) => matches.includes(url));
-			}
-
 			if (selectedTab === 'keywords' && keywordsMapValue[selectedTerm]) {
 				const matches = keywordsMapValue[selectedTerm];
 				return entries.filter(([url]) => matches.includes(url));
@@ -113,7 +101,7 @@
 </svelte:head>
 
 <div class="mx-auto max-w-[76rem] px-4">
-	<Panel {categories} {keywords} />
+	<Panel {keywords} />
 
 	<p class="mb-4 text-center text-lg text-gray-50">
 		<code>{filtered.length}</code>

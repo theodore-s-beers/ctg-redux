@@ -4,7 +4,6 @@
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	export const entries: Writable<[string, JsonStuff][]> = writable([]);
-	export const categoriesMap: Writable<Record<string, string[]>> = writable({});
 	export const keywordsMap: Writable<Record<string, string[]>> = writable({});
 
 	export const searchTerm: Writable<string> = writable('');
