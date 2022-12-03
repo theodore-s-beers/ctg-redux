@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Closing the Gap in Non-Latin Script Data – About</title>
+	<title>Closing the Gap in Non-Latin-Script Data – About</title>
 </svelte:head>
 
 <div class="mx-auto max-w-6xl px-4">
@@ -10,20 +10,20 @@
 			<p>
 				This database was created as part of the project
 				<a
-					class="font-bold hover:underline"
+					class="font-medium hover:underline"
 					href="https://www.berlin-university-alliance.de/commitments/research-quality/forschung/ongoing/closing-the-gap/index.html"
 					target="_blank"
-					rel="noreferrer">Closing the Gap in Non-Latin Script Data</a
+					rel="noreferrer">Closing the Gap in Non-Latin-Script Data</a
 				>
 				under the auspices of the
 				<a
-					class="font-bold hover:underline"
+					class="font-medium hover:underline"
 					href="https://www.berlin-university-alliance.de/index.html"
 					target="_blank"
 					rel="noreferrer">Berlin University Alliance</a
 				>
 				and the
-				<a class="font-bold hover:underline" href="https://www.fu-berlin.de/"
+				<a class="font-medium hover:underline" href="https://www.fu-berlin.de/"
 					>Freie Universität Berlin</a
 				>, which aimed to improve the agency and visibility of NLS-related research in
 				the Digital Humanities in Germany. One part of the project was to get an idea of
@@ -57,7 +57,7 @@
 				If you want to contribute in any way, to work on a localization of this service
 				or to report bugs or feature requests, feel free to contact us via
 				<a
-					class="font-bold hover:underline"
+					class="font-medium hover:underline"
 					href="https://github.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data"
 					target="_blank"
 					rel="noreferrer">GitHub</a
@@ -69,7 +69,7 @@
 			<ul>
 				<li>
 					<a
-						class="font-bold hover:underline"
+						class="font-medium hover:underline"
 						href="https://www.ada.fu-berlin.de/ada-labs/multilingual-dh/index.html"
 						target="_blank"
 						rel="noreferrer">Multilingual DH Lab @ Freie Universität Berlin</a
@@ -78,7 +78,7 @@
 
 				<li>
 					<a
-						class="font-bold hover:underline"
+						class="font-medium hover:underline"
 						href="https://dig-hum.de/ag-multilingual-dh"
 						target="_blank"
 						rel="noreferrer">DHd AG Multilingual DH</a
@@ -89,7 +89,7 @@
 
 				<li>
 					<a
-						class="font-bold hover:underline"
+						class="font-medium hover:underline"
 						href="https://www.geschkult.fu-berlin.de/e/semiarab/arabistik/index.html"
 						target="_blank"
 						rel="noreferrer">Seminar for Semitic and Arabic Studies</a

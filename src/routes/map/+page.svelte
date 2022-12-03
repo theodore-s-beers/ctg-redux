@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Closing the Gap in Non-Latin Script Data – Map</title>
+	<title>Closing the Gap in Non-Latin-Script Data – Map</title>
 </svelte:head>
 
 <LeafletMap />

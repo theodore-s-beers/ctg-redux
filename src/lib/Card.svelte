@@ -47,7 +47,7 @@
 			</div>
 		{/if}
 
-		<h3 class="mb-3 text-xl font-bold">{title}</h3>
+		<h3 class="mb-3 text-xl font-medium">{title}</h3>
 
 		<div class="mb-3">
 			<div class="mb-2">

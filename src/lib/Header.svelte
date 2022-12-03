@@ -4,11 +4,11 @@
 
 <div class="mx-auto mb-4 max-w-[76rem] px-4 text-gray-50">
 	<h1 class="mb-2.5 text-5xl"><a href="/">Closing the Gap</a></h1>
-	<h2 class="text-2xl">in Non-Latin Script Data</h2>
+	<h2 class="text-2xl">in Non-Latin-Script Data</h2>
 </div>
 
 <div class="mb-4 bg-[#f29559] py-3">
-	<div class="mx-auto flex max-w-[76rem] space-x-4 px-4 text-xl">
+	<div class="mx-auto flex max-w-[76rem] space-x-4 px-4 text-xl font-normal">
 		<a
 			href="/"
 			class="underline-offset-2 hover:underline"

@@ -60,7 +60,7 @@
 
 <div class="mb-4 rounded-lg bg-[#b8b08d] p-4">
 	<div class="mb-4 border-b border-b-slate-800">
-		<ul class="flex gap-2 text-lg">
+		<ul class="flex gap-2 text-lg font-normal">
 			<li
 				on:click={() => {
 					selectedTab.set('search');
