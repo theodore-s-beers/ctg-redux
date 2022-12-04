@@ -11,7 +11,13 @@
 		selectedTerm
 	} from '$lib/stores.svelte';
 
-	import { fetchList, fetchEntries, filterPlaces, handleHash } from '$lib/utils.svelte';
+	import {
+		fetchEntries,
+		fetchList,
+		filterPlaces,
+		getKeywords,
+		handleHash
+	} from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	import Card from '$lib/Card.svelte';
@@ -85,7 +91,11 @@
 		const [count, listData] = await fetchList();
 
 		if (entriesValue.length !== count) {
-			await fetchEntries(listData);
+			const freshEntries = await fetchEntries(listData);
+			const freshKeywords = getKeywords(freshEntries);
+
+			entries.set(freshEntries);
+			keywordsMap.set(freshKeywords);
 		}
 	});
 </script>
@@ -103,9 +113,13 @@
 <div class="mx-auto max-w-[76rem] px-4">
 	<Panel {keywords} />
 
-	<p class="mb-4 text-center text-lg text-gray-50">
-		<code>{filtered.length}</code>
-		<span class="font-normal">{filtered.length === 1 ? 'item' : 'items'}</span>
+	<p class="mb-3.5 text-center text-lg font-normal text-gray-50">
+		{#if entriesValue.length === 0}
+			Loading…
+		{:else}
+			<code>{filtered.length}</code>
+			{filtered.length === 1 ? 'item' : 'items'}
+		{/if}
 	</p>
 
 	<div class="flex flex-wrap justify-center gap-4 lg:justify-start">

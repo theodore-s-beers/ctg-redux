@@ -58,7 +58,7 @@
 	$: validSelection = validate(keywords, selectedTermValue);
 </script>
 
-<div class="mb-4 rounded-lg bg-[#b8b08d] p-4">
+<div class="mb-3.5 rounded-lg bg-[#b8b08d] p-4">
 	<div class="mb-4 border-b border-b-slate-800">
 		<ul class="flex gap-2 text-lg font-normal">
 			<li
@@ -103,7 +103,7 @@
 
 	{#if selectedTabValue !== 'search'}
 		{#if validSelection}
-			<p class="mb-3.5 -mt-1 text-red-900 underline">
+			<p class="mb-3.5 -mt-1 font-normal text-red-900 underline">
 				<span
 					on:click={() => {
 						resetHash();

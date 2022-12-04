@@ -1,13 +1,5 @@
 <script lang="ts" context="module">
-	import { browser } from '$app/environment';
-
-	import {
-		entries,
-		keywordsMap,
-		searchTerm,
-		selectedTab,
-		selectedTerm
-	} from '$lib/stores.svelte';
+	import { searchTerm, selectedTab, selectedTerm } from '$lib/stores.svelte';
 
 	interface Listing {
 		title: string;
@@ -20,10 +12,9 @@
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	export type JsonStuff = Record<string, any>;
 
-	export async function fetchEntries(listData: Record<string, Listing>): Promise<void> {
-		entries.set([]);
-		keywordsMap.set({});
-
+	export async function fetchEntries(
+		listData: Record<string, Listing>
+	): Promise<[string, JsonStuff][]> {
 		const listEntries: [string, Listing][] = Object.entries(listData);
 
 		const urls: string[] = [];
@@ -32,30 +23,17 @@
 			urls.push(`${urlPrefix}${details.path}${id}.json`);
 		}
 
-		for (const url of urls) {
-			fetch(url)
-				.then((response) => response.json())
-				.then((data) => {
-					if (data.project) {
-						entries.update((value) => [...value, [url, data]]);
-						entries.update((value) => value.sort((a, b) => sortTitles(a[1], b[1])));
+		let entries: [string, JsonStuff][] = await Promise.all(
+			urls.map(async (url) => {
+				const response = await fetch(url);
+				const data = await response.json();
+				return [url, data];
+			})
+		);
 
-						const keywords: string[] = data.project.keywords;
+		entries = entries.sort((a, b) => sortTitles(a[1], b[1]));
 
-						for (const keyword of keywords) {
-							keywordsMap.update((value) => {
-								if (value[keyword]) {
-									value[keyword].push(url);
-								} else {
-									value[keyword] = [url];
-								}
-
-								return value;
-							});
-						}
-					}
-				});
-		}
+		return entries;
 	}
 
 	export async function fetchList(): Promise<[number, Record<string, Listing>]> {
@@ -71,33 +49,48 @@
 		return places.filter((place) => place.place_name.text);
 	}
 
-	export function handleHash() {
-		if (browser) {
-			if (window.location.hash) {
-				if (window.location.hash.startsWith('#keyword=')) {
-					selectedTab.set('keywords');
-					selectedTerm.set(window.location.hash.split('keyword=')[1]);
+	export function getKeywords(
+		entries: [string, JsonStuff][]
+	): Record<string, string[]> {
+		const keywordsMap: Record<string, string[]> = {};
+
+		for (const [url, data] of entries) {
+			const keywords: string[] = data.project.keywords;
+
+			for (const keyword of keywords) {
+				if (keywordsMap[keyword]) {
+					keywordsMap[keyword].push(url);
 				} else {
-					// TODO: handle search hash
-					// For now, just reset
-					searchTerm.set('');
-					selectedTerm.set('');
+					keywordsMap[keyword] = [url];
 				}
+			}
+		}
+
+		return keywordsMap;
+	}
+
+	export function handleHash() {
+		if (window.location.hash) {
+			if (window.location.hash.startsWith('#keyword=')) {
+				selectedTab.set('keywords');
+				selectedTerm.set(window.location.hash.split('keyword=')[1]);
 			} else {
-				// No hash; just make sure everything is reset
+				// TODO: handle search hash?
+				// For now, just reset
 				searchTerm.set('');
 				selectedTerm.set('');
 			}
+		} else {
+			// No hash; just make sure everything is reset
+			searchTerm.set('');
+			selectedTerm.set('');
 		}
 	}
 
 	export function resetHash() {
 		searchTerm.set('');
 		selectedTerm.set('');
-
-		if (browser) {
-			window.location.hash = '';
-		}
+		window.location.hash = '';
 	}
 
 	export function searchEntries(
@@ -168,10 +161,7 @@
 
 	export function setHash(type: string, term: string) {
 		selectedTerm.set(term);
-
-		if (browser) {
-			window.location.hash = `#${type}=${term}`;
-		}
+		window.location.hash = `#${type}=${term}`;
 	}
 
 	function sortTitles(a: JsonStuff, b: JsonStuff): 1 | -1 | 0 {
