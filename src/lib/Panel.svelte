@@ -142,7 +142,7 @@
 			<input
 				autocorrect="off"
 				autocapitalize="none"
-				class="w-56 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1"
+				class="w-56 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1 font-normal"
 				bind:value={searchTermValue}
 				on:keydown={() => {
 					handleSearch();
