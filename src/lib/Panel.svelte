@@ -138,11 +138,11 @@
 			{/each}
 		</div>
 	{:else}
-		<div class="flex gap-2">
+		<div class="flex gap-2 font-normal">
 			<input
 				autocorrect="off"
 				autocapitalize="none"
-				class="w-56 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1 font-normal"
+				class="w-56 rounded border border-[#2e4a61] bg-gray-100 px-2 py-1"
 				bind:value={searchTermValue}
 				on:keydown={() => {
 					handleSearch();
