@@ -12,7 +12,6 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
   leaflet: ^1.9.3
-  leaflet-svgicon: github:iatkin/leaflet-svgicon
   postcss: ^8.4.19
   prettier: ^2.8.1
   prettier-plugin-svelte: ^2.8.1
@@ -39,7 +38,6 @@ devDependencies:
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0_eslint@8.29.0
   eslint-plugin-svelte3: 4.0.0_2aagxyyd66x6iymg5nfckajqjq
-  leaflet-svgicon: github.com/iatkin/leaflet-svgicon/17606ba642260ceca96d567805f7b26d1574fd0b
   postcss: 8.4.19
   prettier: 2.8.1
   prettier-plugin-svelte: 2.8.1_sro2v6ld777payjtkjtiuogcxi
@@ -1267,6 +1265,7 @@ packages:
 
   /leaflet/1.9.3:
     resolution: {integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==}
+    dev: false
 
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -2066,12 +2065,4 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true
-
-  github.com/iatkin/leaflet-svgicon/17606ba642260ceca96d567805f7b26d1574fd0b:
-    resolution: {tarball: https://codeload.github.com/iatkin/leaflet-svgicon/tar.gz/17606ba642260ceca96d567805f7b26d1574fd0b}
-    name: leaflet-svgicon
-    version: 1.1.0
-    dependencies:
-      leaflet: 1.9.3
     dev: true
