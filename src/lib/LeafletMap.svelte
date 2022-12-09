@@ -42,19 +42,15 @@
 		// Start by loading the Leaflet map
 		//
 
-		const leaflet = await import('leaflet');
-
-		leaflet.Icon.Default.imagePath = 'leaflet/';
+		const L = await import('leaflet');
 
 		// Map is initially centered on Göttingen
-		map = leaflet.map(mapElement).setView([51.53443, 9.93228], 6);
+		map = L.map(mapElement).setView([51.53443, 9.93228], 6);
 
-		leaflet
-			.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				attribution:
-					'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-			})
-			.addTo(map);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution:
+				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
 		//
 		// Fetch project data if necessary
@@ -108,7 +104,38 @@
 				)
 				.join('<hr class="my-1.5" />');
 
-			leaflet.marker([data.lat, data.lng]).addTo(map).bindPopup(joined, {
+			const svgIcon = L.divIcon({
+				html: `
+				<svg xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="m1 16 15 30 15-30a8 8 0 0 0-30 0Z"
+						stroke-width="2"
+						stroke="#06F"
+						fill="#06F"
+						fill-opacity=".4"
+					/>
+					<circle
+						cx="16"
+						cy="16"
+						r="10"
+						fill="#FFF"
+						stroke="#06F"
+					/>
+					<text
+						text-anchor="middle"
+						x="16"
+						y="20"
+						style="font-size:12px"
+						fill="rgba(0, 0, 0,1)">${data.projects.length}</text
+					>
+				</svg>
+				`,
+				className: '',
+				iconSize: [24, 40],
+				iconAnchor: [15, 50]
+			});
+
+			L.marker([data.lat, data.lng], { icon: svgIcon }).addTo(map).bindPopup(joined, {
 				maxHeight: 250,
 				maxWidth: 250
 			});
