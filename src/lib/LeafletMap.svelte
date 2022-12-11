@@ -103,7 +103,12 @@
 			const joined = data.projects
 				.map(
 					(project) =>
-						`<a href=${project.url} target="_blank" rel="noreferrer">${project.title}</a>`
+						`<a
+							href=${project.url}
+							target="_blank"
+							rel="noreferrer"
+							class="font-fira">${project.title}</a
+						>`
 				)
 				.join('<hr class="my-1.5" />');
 
