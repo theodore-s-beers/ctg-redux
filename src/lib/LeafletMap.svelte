@@ -128,7 +128,7 @@
 						text-anchor="middle"
 						x="16"
 						y="20"
-						style="font-size:12px"
+						style="font-size:13px;font-family:'Fira Sans',sans-serif"
 						fill="rgba(0, 0, 0,1)">${data.projects.length}</text
 					>
 				</svg>
