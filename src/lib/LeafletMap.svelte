@@ -109,7 +109,7 @@
 
 			const svgIcon = L.divIcon({
 				html: `
-				<svg xmlns="http://www.w3.org/2000/svg">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 48">
 					<path
 						d="m1 16 15 30 15-30a8 8 0 0 0-30 0Z"
 						stroke-width="2"
@@ -117,13 +117,7 @@
 						fill="#06F"
 						fill-opacity=".4"
 					/>
-					<circle
-						cx="16"
-						cy="16"
-						r="10"
-						fill="#FFF"
-						stroke="#06F"
-					/>
+					<circle cx="16" cy="16" r="10" fill="#FFF" stroke="#06F" />
 					<text
 						text-anchor="middle"
 						x="16"
@@ -134,8 +128,8 @@
 				</svg>
 				`,
 				className: '',
-				iconSize: [24, 40],
-				iconAnchor: [15, 50]
+				iconSize: [32, 48],
+				iconAnchor: [16, 48]
 			});
 
 			L.marker([data.lat, data.lng], { icon: svgIcon }).addTo(map).bindPopup(joined, {
