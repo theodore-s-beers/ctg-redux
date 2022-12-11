@@ -5,6 +5,7 @@
 
 	export const entries: Writable<[string, JsonStuff][]> = writable([]);
 	export const keywordsMap: Writable<Record<string, string[]>> = writable({});
+	export const languagesMap: Writable<Record<string, string[]>> = writable({});
 
 	export const searchTerm: Writable<string> = writable('');
 	export const selectedTab: Writable<string> = writable('search');

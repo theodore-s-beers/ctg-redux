@@ -5,6 +5,7 @@
 	import {
 		entries,
 		keywordsMap,
+		languagesMap,
 		searchTerm,
 		selectedEntries,
 		selectedTab,
@@ -16,8 +17,10 @@
 		fetchList,
 		filterPlaces,
 		getKeywords,
+		getLanguages,
 		handleHash
 	} from '$lib/utils.svelte';
+
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	import Card from '$lib/Card.svelte';
@@ -25,6 +28,7 @@
 
 	let entriesValue: [string, JsonStuff][];
 	let keywordsMapValue: Record<string, string[]>;
+	let languagesMapValue: Record<string, string[]>;
 
 	let searchTermValue: string;
 	let selectedEntriesValue: [string, JsonStuff][];
@@ -38,6 +42,10 @@
 
 	keywordsMap.subscribe((value) => {
 		keywordsMapValue = value;
+	});
+
+	languagesMap.subscribe((value) => {
+		languagesMapValue = value;
 	});
 
 	searchTerm.subscribe((value) => {
@@ -57,6 +65,7 @@
 	});
 
 	$: keywords = Object.keys(keywordsMapValue).sort();
+	$: languages = Object.keys(languagesMapValue).sort();
 
 	function filterEntries(
 		entries: [string, JsonStuff][],
@@ -71,6 +80,11 @@
 		if (selectedTerm) {
 			if (selectedTab === 'keywords' && keywordsMapValue[selectedTerm]) {
 				const matches = keywordsMapValue[selectedTerm];
+				return entries.filter(([url]) => matches.includes(url));
+			}
+
+			if (selectedTab === 'languages' && languagesMapValue[selectedTerm]) {
+				const matches = languagesMapValue[selectedTerm];
 				return entries.filter(([url]) => matches.includes(url));
 			}
 		}
@@ -93,9 +107,11 @@
 		if (entriesValue.length !== count) {
 			const freshEntries = await fetchEntries(listData);
 			const freshKeywords = getKeywords(freshEntries);
+			const freshLanguages = getLanguages(freshEntries);
 
 			entries.set(freshEntries);
 			keywordsMap.set(freshKeywords);
+			languagesMap.set(freshLanguages);
 		}
 	});
 </script>
@@ -111,7 +127,7 @@
 </svelte:head>
 
 <div class="mx-auto max-w-[76rem] px-4">
-	<Panel {keywords} />
+	<Panel {keywords} {languages} />
 
 	<p class="mb-3.5 text-center text-lg font-normal text-gray-50">
 		{#if entriesValue.length === 0}

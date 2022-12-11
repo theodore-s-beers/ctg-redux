@@ -69,11 +69,34 @@
 		return keywordsMap;
 	}
 
+	export function getLanguages(
+		entries: [string, JsonStuff][]
+	): Record<string, string[]> {
+		const languagesMap: Record<string, string[]> = {};
+
+		for (const [url, data] of entries) {
+			const languages: string[] = data.project.research_data.lang;
+
+			for (const language of languages) {
+				if (languagesMap[language]) {
+					languagesMap[language].push(url);
+				} else {
+					languagesMap[language] = [url];
+				}
+			}
+		}
+
+		return languagesMap;
+	}
+
 	export function handleHash() {
 		if (window.location.hash) {
 			if (window.location.hash.startsWith('#keyword=')) {
 				selectedTab.set('keywords');
 				selectedTerm.set(window.location.hash.split('keyword=')[1]);
+			} else if (window.location.hash.startsWith('#language=')) {
+				selectedTab.set('languages');
+				selectedTerm.set(window.location.hash.split('language=')[1]);
 			} else {
 				// TODO: handle search hash?
 				// For now, just reset

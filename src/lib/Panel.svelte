@@ -11,6 +11,7 @@
 	import type { JsonStuff } from '$lib/utils.svelte';
 
 	export let keywords: string[];
+	export let languages: string[];
 
 	let entriesValue: [string, JsonStuff][] = [];
 	let searchTermValue: string;
@@ -47,15 +48,19 @@
 		}, 500);
 	}
 
-	function validate(keywords: string[], selectedTermValue: string) {
+	function validate(keywords: string[], langs: string[], selection: string) {
 		if (selectedTabValue === 'keywords') {
-			return keywords.includes(selectedTermValue);
+			return keywords.includes(selection);
+		}
+
+		if (selectedTabValue === 'languages') {
+			return langs.includes(selection);
 		}
 
 		return false;
 	}
 
-	$: validSelection = validate(keywords, selectedTermValue);
+	$: validSelection = validate(keywords, languages, selectedTermValue);
 </script>
 
 <div class="mb-3.5 rounded-lg bg-[#b8b08d] p-4">
@@ -98,26 +103,65 @@
 			>
 				Keywords
 			</li>
+
+			<li
+				on:click={() => {
+					selectedTab.set('languages');
+					resetHash();
+				}}
+				on:keydown={(e) => {
+					if (e.key === 'Enter') {
+						selectedTab.set('languages');
+						resetHash();
+					}
+				}}
+				class="cursor-pointer rounded-t-md border-x border-t px-2 py-0.5 hover:border-slate-800 hover:bg-[#f29559]"
+				class:bg-[#f29559]={selectedTabValue === 'languages'}
+				class:border-slate-800={selectedTabValue === 'languages'}
+				class:border-[#b8b08d]={selectedTabValue !== 'languages'}
+			>
+				Languages
+			</li>
 		</ul>
 	</div>
 
-	{#if selectedTabValue !== 'search'}
-		{#if validSelection}
-			<p class="mb-3.5 -mt-1 font-normal text-red-900 underline">
-				<span
-					on:click={() => {
+	{#if selectedTabValue !== 'search' && validSelection}
+		<p class="mb-3.5 -mt-1 font-normal text-red-900 underline">
+			<span
+				on:click={() => {
+					resetHash();
+				}}
+				on:keydown={(e) => {
+					if (e.key === 'Enter') {
 						resetHash();
+					}
+				}}
+				class="cursor-pointer">Clear selection</span
+			>
+		</p>
+	{/if}
+
+	{#if selectedTabValue === 'languages'}
+		<div class="flex flex-wrap gap-2.5 text-sm">
+			{#each languages as language}
+				<code
+					on:click={() => {
+						setHash('language', language);
 					}}
 					on:keydown={(e) => {
 						if (e.key === 'Enter') {
-							resetHash();
+							setHash('language', language);
 						}
 					}}
-					class="cursor-pointer">Clear selection</span
+					class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
+					class:bg-[#2e4a61]={selectedTermValue === language}
+					class:border-[#2e4a61]={selectedTermValue === language}
+					class:border-slate-800={selectedTermValue !== language}
+					class:text-gray-50={selectedTermValue === language}>{language}</code
 				>
-			</p>
-		{/if}
-
+			{/each}
+		</div>
+	{:else if selectedTabValue === 'keywords'}
 		<div class="flex flex-wrap gap-2.5 text-sm">
 			{#each keywords as keyword}
 				<code

@@ -2,13 +2,14 @@
 	import { onMount, onDestroy } from 'svelte';
 	import type { Map } from 'leaflet';
 
-	import { entries, keywordsMap } from '$lib/stores.svelte';
+	import { entries, keywordsMap, languagesMap } from '$lib/stores.svelte';
 
 	import {
 		fetchList,
 		filterPlaces,
 		fetchEntries,
-		getKeywords
+		getKeywords,
+		getLanguages
 	} from '$lib/utils.svelte';
 
 	import type { JsonStuff } from '$lib/utils.svelte';
@@ -61,9 +62,11 @@
 		if (entriesValue.length !== count) {
 			const freshEntries = await fetchEntries(listData);
 			const freshKeywords = getKeywords(freshEntries);
+			const freshLanguages = getLanguages(freshEntries);
 
 			entries.set(freshEntries);
 			keywordsMap.set(freshKeywords);
+			languagesMap.set(freshLanguages);
 		}
 
 		//
