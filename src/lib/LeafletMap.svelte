@@ -122,12 +122,11 @@
 						text-anchor="middle"
 						x="16"
 						y="20"
-						style="font-size:13px;font-family:'Fira Sans',sans-serif"
 						fill="rgba(0, 0, 0,1)">${data.projects.length}</text
 					>
 				</svg>
 				`,
-				className: '',
+				className: 'font-fira text-[13px]',
 				iconSize: [32, 48],
 				iconAnchor: [16, 48]
 			});
