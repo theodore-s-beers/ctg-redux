@@ -156,7 +156,7 @@
 </script>
 
 <div class="mx-auto max-w-6xl px-4">
-	<div bind:this={mapElement} class="h-[32rem] rounded-md font-normal" />
+	<div bind:this={mapElement} class="h-[34rem] rounded-md font-normal" />
 </div>
 
 <style>
