@@ -78,8 +78,13 @@
 			const jsonUrl = `${jsonUrlPrefix}${url.split('/PROJECTS/')[1]}`;
 
 			for (const place of places) {
-				if (placesMap[place.place_name.text]) {
-					placesMap[place.place_name.text].projects.push({
+				const key =
+					place.place_name.text +
+					place.coordinates.lat.split('.')[0] +
+					place.coordinates.lng.split('.')[0];
+
+				if (placesMap[key]) {
+					placesMap[key].projects.push({
 						title: data.project.title,
 						url: jsonUrl
 					});
@@ -90,7 +95,7 @@
 						projects: [{ title: data.project.title, url: jsonUrl }]
 					};
 
-					placesMap[place.place_name.text] = initial;
+					placesMap[key] = initial;
 				}
 			}
 		}
