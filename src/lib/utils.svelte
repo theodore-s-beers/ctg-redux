@@ -152,18 +152,6 @@
 				continue;
 			}
 
-			// Categories
-			// This data isn't shown in the front end anymore, but if it's still
-			// in the JSON, we may as well search it
-			const categories = Object.entries(entry.project.topic_relations)
-				.filter(([, v]) => v === true)
-				.map(([k]) => k)
-				.join(' ');
-			if (categories.includes(termLower)) {
-				matches.push([url, entry]);
-				continue;
-			}
-
 			// Places
 			let places = '';
 			for (const place of entry.project.places) {
