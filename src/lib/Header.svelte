@@ -9,15 +9,21 @@
 
 <div class="mb-4 bg-[#f29559] py-3">
 	<div class="mx-auto flex max-w-[76rem] space-x-4 px-4 text-xl font-normal">
-		<a
+		<a 
 			href="/"
 			class="underline-offset-2 hover:underline"
 			class:underline={$page.route.id === '/'}>Projects</a
 		>
+	
 		<a
 			href="/map"
 			class="underline-offset-2 hover:underline"
 			class:underline={$page.route.id === '/map'}>Map</a
+		>
+		<a
+			href="/timeline"
+			class="underline-offset-2 hover:underline"
+			class:underline={$page.route.id === '/timeline'}>Timeline</a
 		>
 		<a
 			href="/about"
@@ -26,3 +32,4 @@
 		>
 	</div>
 </div>
+
