@@ -124,7 +124,7 @@
           </th>
     </tr>
 
- <tr class="table-head sticky border-y border-black">
+ <tr class="table-head sticky border-y border-black bg-[#426B8C]">
     <th class="border-black">Project</th>
     {#each years as year, i}
       <th  class="sticky top-0 border-l px-3 pb-1 text-xs border-black"> {year}</th> 

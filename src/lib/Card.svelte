@@ -22,7 +22,7 @@
 
 	const prefix =
 		'https://github.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/blob/master/PROJECTS/';
-	$: suffix = url.split('/PROJECTS/')[1];
+    $: suffix = url.split('/PROJECTS/')[1];
 	$: jsonLink = prefix + suffix;
 </script>
 
