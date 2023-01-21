@@ -148,13 +148,7 @@
 				languages={data.project.lang}
 				websiteLinks={data.project.websites}
 				{url}
-				lastEdited={data.record_metadata.record_modified[
-					data.record_metadata.record_modified.length - 1
-				].record_modified_on
-					? data.record_metadata.record_modified[
-							data.record_metadata.record_modified.length - 1
-					  ].record_modified_on
-					: data.record_metadata.record_created_on}
+				lastEdited={data.record_metadata.last_edited_on}
 				keywords={data.project.keywords}
 			/>
 		{/each}
