@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+
 	import { entries, keywordsMap, languagesMap } from '$lib/stores.svelte';
 
 	import {
@@ -61,15 +62,17 @@
 		const prefix =
 			'https://github.com/M-L-D-H/Closing-The-Gap-In-Non-Latin-Script-Data/blob/master/PROJECTS/';
 		const suffix = url.split('/PROJECTS/')[1];
+	
 		return prefix + suffix;
 	}
-
+ let data = [];
 	onMount(async () => {
 		//
 		// Fetch project data if necessary
 		//
 
 		const [count, listData] = await fetchList();
+		
 
 		if (entriesValue.length !== count) {
 			const freshEntries = await fetchEntries(listData);
@@ -79,11 +82,17 @@
 			entries.set(freshEntries);
 			keywordsMap.set(freshKeywords);
 			languagesMap.set(freshLanguages);
+			console.log('hhhhhh',freshEntries);
+
+	         const response = await fetch(freshEntries[0][0]);
+             data = await response.json();
+			 console.log('hhhhhh',data);
+	
 		}
 	});
 </script>
 
-<div class="mx-auto max-w-[76rem] px-4">
+<div class="mx-auto maxLength px-4">
 	{#if entriesFiltered.length === 0}
 		<p class="text-center text-lg font-normal text-gray-50">Loading…</p>
 	{:else}
@@ -112,8 +121,7 @@
 						{#if i === entriesFiltered.length - 1}
 							<td class="border-r border-slate-800 px-2 py-0.5"
 								>{truncateTitle(entry.project.title)}</td
-							>
-
+>
 							{#each years as year, j}
 								{#if fundedYear(Number(year), entry)}
 									<td class="bg-slate-800" />
@@ -145,4 +153,9 @@
 			</tbody>
 		</table>
 	{/if}
+
+
 </div>
+
+
+
