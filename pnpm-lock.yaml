@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@sveltejs/adapter-auto': 2.0.0
-  '@sveltejs/adapter-static': 2.0.0
   '@sveltejs/kit': 1.5.0
   '@types/leaflet': ^1.9.0
   '@typescript-eslint/eslint-plugin': ^5.51.0
@@ -29,7 +28,6 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.5.0
-  '@sveltejs/adapter-static': 2.0.0_@sveltejs+kit@1.5.0
   '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
   '@types/leaflet': 1.9.0
   '@typescript-eslint/eslint-plugin': 5.51.0_b635kmla6dsb4frxfihkw4m47e
@@ -335,14 +333,6 @@ packages:
     dependencies:
       '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
       import-meta-resolve: 2.2.1
-    dev: true
-
-  /@sveltejs/adapter-static/2.0.0_@sveltejs+kit@1.5.0:
-    resolution: {integrity: sha512-M9F8EyCIdVcpZu0zvS7U7v+rc7elNNDUkMHLsOkJYlfQ9rDdif3fqteMqddcrq1lFPEGH1ErdTjpsXdb3k1e8w==}
-    peerDependencies:
-      '@sveltejs/kit': ^1.5.0
-    dependencies:
-      '@sveltejs/kit': 1.5.0_svelte@3.55.1+vite@4.1.1
     dev: true
 
   /@sveltejs/kit/1.5.0_svelte@3.55.1+vite@4.1.1:
