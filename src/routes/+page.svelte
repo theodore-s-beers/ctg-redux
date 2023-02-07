@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { afterNavigate } from '$app/navigation';
+	
 
 	import {
 		entries,
@@ -119,6 +120,7 @@
 <svelte:window on:hashchange={handleHash} />
 
 <svelte:head>
+
 	<title>Closing the Gap in Non-Latin-Script Data – Projects</title>
 	<meta
 		name="twitter:title"
