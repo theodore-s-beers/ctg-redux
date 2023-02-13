@@ -25,6 +25,11 @@
 			class:underline={$page.route.id === '/timeline'}>Timeline</a
 		>
 		<a
+			href="/contribute"
+			class="underline-offset-2 hover:underline"
+			class:underline={$page.route.id === '/contribute'}>Contribute</a
+		>
+		<a
 			href="/about"
 			class="underline-offset-2 hover:underline"
 			class:underline={$page.route.id === '/about'}>About</a
