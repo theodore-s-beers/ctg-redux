@@ -7,6 +7,8 @@
 		selectedTerm
 	} from '$lib/stores.svelte';
 
+	import { langNames } from '$lib/lang_names.svelte';
+
 	import { searchEntries, resetHash, setHash } from '$lib/utils.svelte';
 	import type { JsonStuff } from '$lib/utils.svelte';
 
@@ -157,7 +159,8 @@
 					class:bg-[#2e4a61]={selectedTermValue === language}
 					class:border-[#2e4a61]={selectedTermValue === language}
 					class:border-slate-800={selectedTermValue !== language}
-					class:text-gray-50={selectedTermValue === language}>{language}</code
+					class:text-gray-50={selectedTermValue === language}
+					title={langNames[language] || language}>{language}</code
 				>
 			{/each}
 		</div>
