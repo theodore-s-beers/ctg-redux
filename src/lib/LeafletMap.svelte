@@ -46,7 +46,7 @@
 		const L = await import('leaflet');
 
 		// Map is initially centered on Göttingen
-		map = L.map(mapElement).setView([51.53443, 9.93228], 6);
+		map = L.map(mapElement).setView([51.53443, 9.93228], 5);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			attribution:
