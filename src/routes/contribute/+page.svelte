@@ -21,5 +21,25 @@
 		</p>
 
 		<p><em>To be implemented…</em></p>
+
+		<p>
+			Most of the schema can be considered optional, but the following data points are
+			required:
+		</p>
+
+		<ul class="list-inside list-disc">
+			<li>Name of the person adding the record</li>
+			<li>Project/organization name</li>
+			<li>Type (i.e., project or organization)</li>
+			<li>At least one website URL</li>
+			<li>Project/organization description</li>
+			<li>At least one associated place (usually a city)</li>
+			<li>Language(s) of the project/organization’s work (at least one)</li>
+			<li>Details for at least one contact person</li>
+			<li>
+				Language(s) of sources with which the project/organization works (at least one)
+			</li>
+			<li>Relevant keywords (chosen from a list)</li>
+		</ul>
 	</div>
 </div>
