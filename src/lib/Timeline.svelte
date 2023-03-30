@@ -99,7 +99,7 @@
 								>’{year.slice(-2)}</th
 							>
 						{:else}
-							<th class="border-r border-b border-slate-800 px-1 py-1.5 text-sm"
+							<th class="border-b border-r border-slate-800 px-1 py-1.5 text-sm"
 								>’{year.slice(-2)}</th
 							>
 						{/if}
@@ -136,7 +136,7 @@
 								{:else if j === years.length - 1}
 									<td class="border-b border-slate-800/25" />
 								{:else}
-									<td class="border-r border-b border-slate-800/25" />
+									<td class="border-b border-r border-slate-800/25" />
 								{/if}
 							{/each}
 						{/if}

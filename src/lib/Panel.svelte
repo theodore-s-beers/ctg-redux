@@ -128,7 +128,7 @@
 	</div>
 
 	{#if selectedTabValue !== 'search' && validSelection}
-		<p class="mb-3.5 -mt-1 font-normal text-red-900 underline">
+		<p class="-mt-1 mb-3.5 font-normal text-red-900 underline">
 			<span
 				on:click={() => {
 					resetHash();
@@ -155,7 +155,7 @@
 							setHash('language', language);
 						}
 					}}
-					class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
+					class="cursor-pointer rounded-md border px-2 py-0.5 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
 					class:bg-[#2e4a61]={selectedTermValue === language}
 					class:border-[#2e4a61]={selectedTermValue === language}
 					class:border-slate-800={selectedTermValue !== language}
@@ -176,7 +176,7 @@
 							setHash('keyword', keyword);
 						}
 					}}
-					class="cursor-pointer rounded-md border py-0.5 px-2 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
+					class="cursor-pointer rounded-md border px-2 py-0.5 hover:border-[#2e4a61] hover:bg-[#2e4a61] hover:text-gray-50"
 					class:bg-[#2e4a61]={selectedTermValue === keyword}
 					class:border-[#2e4a61]={selectedTermValue === keyword}
 					class:border-slate-800={selectedTermValue !== keyword}

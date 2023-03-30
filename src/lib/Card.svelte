@@ -78,7 +78,7 @@
 
 		<div class="mb-4 flex flex-wrap gap-2 text-sm">
 			{#each keywords as keyword}
-				<code class="rounded-md border border-slate-800 py-0.5 px-2">{keyword}</code>
+				<code class="rounded-md border border-slate-800 px-2 py-0.5">{keyword}</code>
 			{/each}
 		</div>
 
